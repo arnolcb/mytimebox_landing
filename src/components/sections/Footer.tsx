@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from 'lucide-react';
+
 
 export const Footer = ({ t, lang }: { t: any; lang: string }) => {
   return (
@@ -8,7 +8,7 @@ export const Footer = ({ t, lang }: { t: any; lang: string }) => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-10 mb-16">
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <Box className="w-6 h-6 text-bg fill-text-primary" />
+              <img src="/logo.svg" alt="My Timebox" className="w-6 h-6" />
               <span className="font-medium tracking-tight text-xl text-text-primary">My Timebox</span>
             </div>
             <p className="text-text-secondary max-w-xs leading-relaxed text-sm">

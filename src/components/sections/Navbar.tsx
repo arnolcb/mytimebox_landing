@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Box, ChevronDown, X } from 'lucide-react';
+import { ChevronDown, X } from 'lucide-react';
 
 export const Navbar = ({ 
   t, 
@@ -29,7 +29,7 @@ export const Navbar = ({
         <header className={`pointer-events-auto flex items-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-xl border ${scrolled ? 'w-[95%] sm:w-[90%] max-w-4xl h-14 bg-surface/90 rounded-full border-border shadow-2xl' : 'w-full max-w-full h-16 bg-black/60 rounded-none border-transparent border-b-border shadow-none'}`}>
           <div className={`w-full flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] mx-auto ${scrolled ? 'px-4 md:px-6 max-w-full' : 'px-5 md:px-10 max-w-6xl'}`}>
             <div className="flex items-center gap-2">
-              <Box className="w-5 h-5 text-bg fill-text-primary" />
+              <img src="/logo.svg" alt="My Timebox" className="w-6 h-6" />
               <span className="font-semibold text-base tracking-tight text-text-primary">My Timebox</span>
             </div>
             

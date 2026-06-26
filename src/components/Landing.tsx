@@ -1,32 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { content } from '../data/content';
-import { FAQ } from './sections/FAQ';
-import { Banner } from './sections/Banner';
-import { Footer } from './sections/Footer';
-import { BentoGrid } from './sections/BentoGrid';
-import { ComparisonTable } from './sections/ComparisonTable';
-import { HowItWorks } from './sections/HowItWorks';
-import { Features } from './sections/Features';
-import { Hero } from './sections/Hero';
-import { WhatIsTimeboxing } from './sections/WhatIsTimeboxing';
 import { Navbar } from './sections/Navbar';
+import { Hero } from './sections/Hero';
 
-export default function Landing() {
-  const [lang, setLang] = useState<'es' | 'en'>('es');
+// Lazy loaded components for Code Splitting below the fold
+const WhatIsTimeboxing = lazy(() => import('./sections/WhatIsTimeboxing').then(module => ({ default: module.WhatIsTimeboxing })));
+const ComparisonTable = lazy(() => import('./sections/ComparisonTable').then(module => ({ default: module.ComparisonTable })));
+const HowItWorks = lazy(() => import('./sections/HowItWorks').then(module => ({ default: module.HowItWorks })));
+const Features = lazy(() => import('./sections/Features').then(module => ({ default: module.Features })));
+const BentoGrid = lazy(() => import('./sections/BentoGrid').then(module => ({ default: module.BentoGrid })));
+const FAQ = lazy(() => import('./sections/FAQ').then(module => ({ default: module.FAQ })));
+const Banner = lazy(() => import('./sections/Banner').then(module => ({ default: module.Banner })));
+const Footer = lazy(() => import('./sections/Footer').then(module => ({ default: module.Footer })));
+
+export default function Landing({ initialLang = 'es' }: { initialLang?: 'es' | 'en' }) {
+  const [lang, setLang] = useState<'es' | 'en'>(initialLang);
   const t = content[lang];
 
-  // Auto-detect user language
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const userLang = navigator.language;
-      if (userLang.toLowerCase().startsWith('en')) {
-        setLang('en');
-      }
-    }
-  }, []);
-
   const toggleLang = () => {
-    setLang(l => l === 'es' ? 'en' : 'es');
+    if (lang === 'es') {
+      window.location.href = '/en';
+    } else {
+      window.location.href = '/';
+    }
   };
 
 
@@ -42,31 +38,35 @@ export default function Landing() {
         {/* Hero Section */}
         <Hero t={t.hero} />
 
-        {/* What is Timeboxing */}
-        <WhatIsTimeboxing t={t.whatIs} />
+        <Suspense fallback={<div className="h-screen flex items-center justify-center"></div>}>
+          {/* What is Timeboxing */}
+          <WhatIsTimeboxing t={t.whatIs} />
 
-        {/* Comparison */}
-        <ComparisonTable t={t.comparison} />
+          {/* Comparison */}
+          <ComparisonTable t={t.comparison} />
 
-        {/* How It Works */}
-        <HowItWorks t={t.howItWorks} />
+          {/* How It Works */}
+          <HowItWorks t={t.howItWorks} />
 
-        {/* Integrations */}
-        <Features t={t.features} />
+          {/* Integrations */}
+          <Features t={t.features} />
 
-        {/* Bento Grid */}
-        <BentoGrid t={t} />
+          {/* Bento Grid */}
+          <BentoGrid t={t} />
 
-        {/* FAQ */}
-        <FAQ t={t.faq} />
+          {/* FAQ */}
+          <FAQ t={t.faq} />
 
-        {/* Banner (React Bits style CTA Card) */}
-        <Banner t={t.banner} />
+          {/* Banner (React Bits style CTA Card) */}
+          <Banner t={t.banner} />
+        </Suspense>
 
       </main>
 
-      {/* Footer */}
-      <Footer t={t} lang={lang} />
+      <Suspense fallback={<div className="h-20"></div>}>
+        {/* Footer */}
+        <Footer t={t} lang={lang} />
+      </Suspense>
     </div>
   );
 }

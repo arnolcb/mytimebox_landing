@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { Box, CircleCheck } from 'lucide-react';
+import { CircleCheck } from 'lucide-react';
 import { springTransition } from '../../utils/animations';
 import { GoogleIcon, TeamsIcon, MicrosoftIcon } from '../ui/icons/Icons';
 
@@ -35,7 +35,7 @@ const IntegrationsSlot = () => {
 
 const TimeboxBlock = () => (
   <div className="w-10 h-10 rounded-full border border-border/50 bg-text-primary text-bg shadow-[0_0_15px_rgba(255,255,255,0.15)] flex items-center justify-center">
-    <Box size={20} className="fill-bg text-text-primary" />
+    <img src="/logo.svg" alt="Timebox" className="w-5 h-5 invert" />
   </div>
 );
 

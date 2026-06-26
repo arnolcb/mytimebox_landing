@@ -77,7 +77,7 @@ export const Hero = ({ t }: { t: any }) => {
           className="flex-1 w-full flex justify-center lg:justify-end mt-4 lg:mt-0"
         >
           <div className="w-full max-w-[320px] md:max-w-[400px] lg:max-w-[500px] flex justify-center">
-            <video src="/video/glass_box_3.webm" autoPlay loop muted playsInline className="w-full h-auto max-h-[35vh] lg:max-h-none object-contain block mix-blend-screen" />
+            <video src="/video/glass_box_3.webm" poster="/video/poster.webp" preload="metadata" autoPlay loop muted playsInline className="w-full h-auto max-h-[35vh] lg:max-h-none object-contain block mix-blend-screen" />
           </div>
         </motion.div>
       </div>
